@@ -3,7 +3,6 @@
   padding: var(--section-padding);
   position: relative;
   z-index: 1;
-  background: var(--bg-secondary);
 }
 
 .projects__header {
@@ -16,33 +15,35 @@
   gap: 1.5rem;
 }
 
-/* Project card */
+/* Project card — reads like a small terminal window */
 .project-card {
   position: relative;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
-  padding: 2rem;
+  padding: 1.6rem 1.9rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.1rem;
   transition: all var(--transition-smooth);
   overflow: hidden;
   cursor: default;
 }
 
 .project-card:hover {
-  border-color: var(--border-accent);
+  border-color: var(--glass-border-strong);
   transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(124, 58, 237, 0.1);
+  box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.55);
 }
 
 .project-card--featured {
-  border-color: rgba(124, 58, 237, 0.3);
-  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(124, 58, 237, 0.05) 100%);
+  border-color: var(--amber-line);
+  background: linear-gradient(160deg, var(--glass) 0%, var(--amber-soft) 130%);
 }
 .project-card--featured:hover {
-  border-color: var(--accent-purple);
+  border-color: var(--amber);
 }
 
 /* Featured badge */
@@ -50,13 +51,13 @@
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;
-  padding: 0.25rem 0.75rem;
-  background: var(--accent-purple);
-  color: var(--white);
+  padding: 0.28rem 0.75rem;
+  background: var(--amber);
+  color: #191207;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   border-radius: 100px;
 }
@@ -66,14 +67,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--ink-line);
 }
 
 .project-card__number {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  color: var(--accent-purple);
-  letter-spacing: 0.1em;
+  color: var(--paper-faint);
+  letter-spacing: 0.08em;
 }
 
 .project-card__github {
@@ -83,16 +86,16 @@
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 500;
-  color: var(--text-muted);
-  padding: 0.3rem 0.7rem;
-  border: 1px solid var(--border-subtle);
+  color: var(--paper-dim);
+  padding: 0.32rem 0.7rem;
+  border: 1px solid var(--glass-border);
   border-radius: 6px;
   transition: all var(--transition-fast);
 }
 .project-card__github:hover {
-  color: var(--accent-violet);
-  border-color: var(--border-accent);
-  background: rgba(124, 58, 237, 0.08);
+  color: var(--amber);
+  border-color: var(--amber-line);
+  background: var(--amber-soft);
 }
 
 /* Body */
@@ -105,24 +108,24 @@
 
 .project-card__title {
   font-family: var(--font-display);
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-size: 1.28rem;
+  font-weight: 600;
+  color: var(--paper);
   line-height: 1.2;
 }
 
 .project-card__subtitle {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--accent-violet);
-  letter-spacing: 0.05em;
+  font-size: 0.74rem;
+  color: var(--teal);
+  letter-spacing: 0.02em;
   margin-bottom: 0.5rem;
 }
 
 .project-card__desc {
   font-size: 0.88rem;
   line-height: 1.7;
-  color: var(--text-secondary);
+  color: var(--paper-dim);
 }
 
 /* Tags */
@@ -133,23 +136,23 @@
 }
 
 .project-card__tag {
-  padding: 0.25rem 0.6rem;
-  background: rgba(124, 58, 237, 0.1);
-  border: 1px solid rgba(124, 58, 237, 0.2);
-  border-radius: 4px;
+  padding: 0.28rem 0.65rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--ink-line);
+  border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 500;
-  color: var(--accent-violet);
-  letter-spacing: 0.05em;
+  color: var(--paper-dim);
+  letter-spacing: 0.02em;
 }
 
-/* Glow effect */
+/* Hover accent wash, replaces the old blurred glow-blob */
 .project-card__glow {
   position: absolute;
   inset: 0;
   border-radius: 16px;
-  background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.08), transparent 70%);
+  background: linear-gradient(180deg, rgba(240, 163, 67, 0.06), transparent 55%);
   opacity: 0;
   transition: opacity var(--transition-smooth);
   pointer-events: none;

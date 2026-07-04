@@ -1,8 +1,8 @@
 /* Footer.css */
 .footer {
   padding: 2.5rem clamp(1.5rem, 6vw, 6rem);
-  border-top: 1px solid var(--border-subtle);
-  background: var(--bg-secondary);
+  border-top: 1px solid var(--ink-line);
+  background: var(--ink-raised);
   position: relative;
   z-index: 1;
 }
@@ -23,19 +23,21 @@
 }
 
 .footer__logo {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--paper);
+  display: inline-flex;
+  align-items: center;
 }
-.footer__logo-dot { color: var(--accent-violet); }
+.footer__logo::before { content: '>'; color: var(--amber); margin-right: 0.35em; }
+.footer__logo-dot { display: none; }
 
 .footer__tagline {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--text-muted);
-  letter-spacing: 0.05em;
+  color: var(--paper-faint);
+  letter-spacing: 0.03em;
 }
 
 .footer__center {
@@ -44,14 +46,14 @@
 
 .footer__copy {
   font-size: 0.82rem;
-  color: var(--text-muted);
+  color: var(--paper-faint);
 }
-.footer__name { color: var(--accent-violet); }
+.footer__name { color: var(--amber); }
 
 .footer__year {
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  color: var(--text-muted);
+  color: var(--paper-faint);
   margin-top: 0.15rem;
 }
 
@@ -67,16 +69,16 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
   border-radius: 8px;
-  color: var(--text-muted);
+  color: var(--paper-faint);
   transition: all var(--transition-fast);
 }
 .footer__link:hover {
-  color: var(--accent-violet);
-  border-color: var(--border-accent);
-  background: rgba(124, 58, 237, 0.1);
+  color: var(--amber);
+  border-color: var(--amber-line);
+  background: var(--amber-soft);
   transform: translateY(-2px);
 }
 

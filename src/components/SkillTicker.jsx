@@ -9,7 +9,7 @@ export default function SkillTicker({ items }) {
       <div className="ticker__track">
         {doubled.map((item, i) => (
           <span key={i} className="ticker__item">
-            <span className="ticker__dot">✦</span>
+            <span className="ticker__dot">/</span>
             {item}
           </span>
         ))}

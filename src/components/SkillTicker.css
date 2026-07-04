@@ -2,10 +2,10 @@
 .ticker {
   overflow: hidden;
   width: 100%;
-  padding: 1.4rem 0;
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
-  background: var(--bg-secondary);
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--ink-line);
+  background: var(--ink-raised);
   position: relative;
   z-index: 1;
 }
@@ -22,11 +22,11 @@
 }
 .ticker::before {
   left: 0;
-  background: linear-gradient(90deg, var(--bg-secondary), transparent);
+  background: linear-gradient(90deg, var(--ink-raised), transparent);
 }
 .ticker::after {
   right: 0;
-  background: linear-gradient(-90deg, var(--bg-secondary), transparent);
+  background: linear-gradient(-90deg, var(--ink-raised), transparent);
 }
 
 .ticker__track {
@@ -34,7 +34,7 @@
   align-items: center;
   gap: 0;
   white-space: nowrap;
-  animation: ticker-scroll 35s linear infinite;
+  animation: ticker-scroll 38s linear infinite;
   width: max-content;
 }
 
@@ -50,23 +50,21 @@
 .ticker__item {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-display);
+  gap: 0.65rem;
+  font-family: var(--font-mono);
   font-size: 0.82rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  padding: 0 2.2rem;
+  color: var(--paper-dim);
+  padding: 0 1.7rem;
   transition: color var(--transition-fast);
 }
 
 .ticker__item:hover {
-  color: var(--accent-violet);
+  color: var(--amber);
 }
 
 .ticker__dot {
-  color: var(--accent-purple);
-  font-size: 0.6rem;
+  color: var(--paper-faint);
+  font-size: 0.75rem;
   flex-shrink: 0;
 }

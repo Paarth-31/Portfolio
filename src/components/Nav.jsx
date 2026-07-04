@@ -6,6 +6,7 @@ const NAV_LINKS = [
   { label: 'About',        href: '#about'         },
   { label: 'Projects',     href: '#projects'      },
   { label: 'Achievements', href: '#achievements'  },
+  { label: 'Experience',   href: '#experience'    },
   { label: 'Contact',      href: '#contact'       },
 ];
 
@@ -40,7 +41,7 @@ export default function Nav({ resumeLink }) {
       <div className="nav__inner">
         {/* Logo */}
         <a href="#home" className="nav__logo">
-          PG<span className="nav__logo-dot">.</span>
+          paarth<span className="nav__logo-dot" aria-hidden="true" />
         </a>
 
         {/* Desktop links */}

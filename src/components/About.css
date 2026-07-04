@@ -5,10 +5,6 @@
   z-index: 1;
 }
 
-.section-padding {
-  padding: clamp(5rem, 10vw, 7rem) clamp(1.5rem, 6vw, 6rem);
-}
-
 .about__header {
   margin-bottom: 3.5rem;
 }
@@ -31,7 +27,7 @@
   font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.8;
-  color: var(--text-secondary);
+  color: var(--paper-dim);
 }
 
 /* Education card */
@@ -40,14 +36,16 @@
   gap: 1rem;
   align-items: flex-start;
   padding: 1.25rem 1.5rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
   margin-top: 0.5rem;
-  transition: border-color var(--transition-fast);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
 }
 .about__edu:hover {
-  border-color: var(--border-accent);
+  border-color: var(--amber-line);
+  background: var(--glass-strong);
 }
 
 .about__edu-icon {
@@ -62,14 +60,14 @@
   font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--paper);
   margin-bottom: 0.2rem;
   line-height: 1.3;
 }
 
 .about__edu-degree {
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: var(--paper-dim);
   margin-bottom: 0.5rem;
 }
 
@@ -79,24 +77,23 @@
   gap: 0.5rem;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: var(--paper-faint);
 }
-.about__edu-sep { color: var(--border-subtle); }
-.about__edu-cgpa strong { color: var(--accent-violet); }
+.about__edu-sep { color: var(--paper-faint); }
+.about__edu-cgpa strong { color: var(--amber); }
 
 /* Skills */
 .about__skills {
   position: sticky;
-  top: 5rem;
+  top: 6rem;
 }
 
 .about__skills-title {
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--paper-faint);
   margin-bottom: 1.25rem;
 }
 
@@ -109,22 +106,23 @@
 .about__skill-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 0.9rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 6px;
+  gap: 0.55rem;
+  padding: 0.5rem 0.95rem;
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--paper-dim);
   transition: all var(--transition-fast);
   cursor: default;
 }
 .about__skill-pill:hover {
-  border-color: var(--border-accent);
-  color: var(--text-primary);
-  background: var(--bg-card-hover);
+  border-color: var(--glass-border-strong);
+  color: var(--paper);
+  background: var(--glass-strong);
   transform: translateY(-2px);
 }
 

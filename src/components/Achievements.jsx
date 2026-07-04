@@ -1,6 +1,12 @@
 import React from 'react';
 import './Achievements.css';
 
+const PLATFORM_COLOR = {
+  CodeChef:   'var(--rank-codechef)',
+  Codeforces: 'var(--rank-codeforces)',
+  LeetCode:   'var(--rank-leetcode)',
+};
+
 export default function Achievements({ achievements, codingProfiles }) {
   return (
     <section id="achievements" className="achievements section-padding">
@@ -25,37 +31,44 @@ export default function Achievements({ achievements, codingProfiles }) {
             ))}
           </div>
 
-          {/* Coding profiles panel */}
+          {/* Coding profiles panel — accented with each platform's real brand color */}
           <div className="coding-profiles fade-up delay-2">
             <p className="coding-profiles__title">Coding Profiles</p>
-            {codingProfiles.map((profile) => (
-              <a
-                key={profile.platform}
-                href={profile.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="coding-profile-card"
-              >
-                <div className="coding-profile-card__top">
-                  <span className="coding-profile-card__platform">{profile.platform}</span>
-                  <span className="coding-profile-card__handle">@{profile.handle}</span>
-                </div>
-                <div className="coding-profile-card__stats">
-                  <div className="coding-profile-stat">
-                    <span className="coding-profile-stat__val gradient-text">{profile.problems}</span>
-                    <span className="coding-profile-stat__label">Problems</span>
+            {codingProfiles.map((profile) => {
+              const accent = PLATFORM_COLOR[profile.platform] || 'var(--amber)';
+              return (
+                <a
+                  key={profile.platform}
+                  href={profile.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="coding-profile-card"
+                  style={{ '--platform-accent': accent }}
+                >
+                  <div className="coding-profile-card__top">
+                    <span className="coding-profile-card__platform">
+                      <span className="coding-profile-card__swatch" />
+                      {profile.platform}
+                    </span>
+                    <span className="coding-profile-card__handle">@{profile.handle}</span>
                   </div>
-                  <div className="coding-profile-stat">
-                    <span className="coding-profile-stat__val gradient-text">{profile.rating}</span>
-                    <span className="coding-profile-stat__label">Max Rating</span>
+                  <div className="coding-profile-card__stats">
+                    <div className="coding-profile-stat">
+                      <span className="coding-profile-stat__val" style={{ color: accent }}>{profile.problems}</span>
+                      <span className="coding-profile-stat__label">Problems</span>
+                    </div>
+                    <div className="coding-profile-stat">
+                      <span className="coding-profile-stat__val" style={{ color: accent }}>{profile.rating}</span>
+                      <span className="coding-profile-stat__label">Max Rating</span>
+                    </div>
+                    <div className="coding-profile-stat">
+                      <span className="coding-profile-stat__val">{profile.stars}</span>
+                      <span className="coding-profile-stat__label">Rank</span>
+                    </div>
                   </div>
-                  <div className="coding-profile-stat">
-                    <span className="coding-profile-stat__val">{profile.stars}</span>
-                    <span className="coding-profile-stat__label">Rank</span>
-                  </div>
-                </div>
-              </a>
-            ))}
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>

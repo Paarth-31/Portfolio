@@ -2,13 +2,13 @@ import React from 'react';
 import './About.css';
 
 const CATEGORY_COLORS = {
-  Frontend: '#7C3AED',
-  Backend:  '#2563EB',
-  Language: '#059669',
-  Database: '#D97706',
-  Tools:    '#DC2626',
-  Cloud:    '#0891B2',
-  Protocol: '#7C3AED',
+  Frontend: '#57D6C2',
+  Backend:  '#F0A343',
+  Language: '#FFB627',
+  Database: '#C89666',
+  Tools:    '#E8735F',
+  Cloud:    '#4C93D6',
+  Protocol: '#57D6C2',
 };
 
 export default function About({ data }) {

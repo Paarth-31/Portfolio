@@ -1,33 +1,44 @@
 /* ===================================
    GLOBAL CSS RESET & DESIGN TOKENS
+   "Compile & Run" — an engineer's console, not a template
    =================================== */
 
 :root {
-  /* Colors */
-  --bg-primary: #0A0A0F;
-  --bg-secondary: #0F0F1A;
-  --bg-card: #12121E;
-  --bg-card-hover: #161628;
+  /* Ink surfaces */
+  --ink: #0B0D12;
+  --ink-raised: #12151C;
+  --ink-line: rgba(255, 255, 255, 0.08);
 
-  --accent-purple: #7C3AED;
-  --accent-violet: #A855F7;
-  --accent-glow: rgba(124, 58, 237, 0.4);
-  --accent-glow-soft: rgba(124, 58, 237, 0.15);
+  /* Glass */
+  --glass: rgba(255, 255, 255, 0.045);
+  --glass-strong: rgba(255, 255, 255, 0.075);
+  --glass-border: rgba(255, 255, 255, 0.10);
+  --glass-border-strong: rgba(255, 255, 255, 0.18);
 
-  --text-primary: #F0F0F8;
-  --text-secondary: #A0A0B8;
-  --text-muted: #5A5A78;
-  --text-accent: #A855F7;
+  /* Signal colors — warm amber primary, cool teal secondary.
+     Deliberately not the purple/violet-on-black combo. */
+  --amber: #F0A343;
+  --amber-soft: rgba(240, 163, 67, 0.16);
+  --amber-line: rgba(240, 163, 67, 0.4);
+  --teal: #57D6C2;
+  --teal-soft: rgba(87, 214, 194, 0.14);
 
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-accent: rgba(124, 58, 237, 0.35);
+  /* Real brand colors for the coding-profile ratings — grounded, not decorative */
+  --rank-codeforces: #4C93D6;
+  --rank-leetcode: #FFB627;
+  --rank-codechef: #C89666;
+
+  /* Text */
+  --paper: #EBEDF2;
+  --paper-dim: #939AAA;
+  --paper-faint: #565D6C;
 
   --white: #FFFFFF;
 
   /* Typography */
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-mono: 'IBM Plex Mono', monospace;
 
   /* Spacing */
   --section-padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 6vw, 6rem);
@@ -35,7 +46,7 @@
 
   /* Transitions */
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *, *::before, *::after {
@@ -49,25 +60,54 @@ html {
   font-size: 16px;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 body {
   font-family: var(--font-body);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--ink);
+  color: var(--paper);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Fine dot-grid ground texture + soft vignette — quiet, not a glow-orb cliché */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,0,0,0.9), transparent 75%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
-::-webkit-scrollbar-thumb { background: var(--accent-purple); border-radius: 3px; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--ink-raised); border: 1px solid var(--ink-line); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--amber); }
 
 /* Selection */
 ::selection {
-  background: var(--accent-purple);
-  color: var(--white);
+  background: var(--amber);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 3px;
 }
 
 /* Utility */
@@ -75,6 +115,13 @@ body {
   max-width: var(--max-width);
   margin: 0 auto;
   width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.section-padding {
+  padding: var(--section-padding);
+  position: relative;
 }
 
 a {
@@ -90,51 +137,59 @@ img {
 /* Fade-up animation on scroll */
 .fade-up {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .fade-up.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.fade-up.delay-1 { transition-delay: 0.1s; }
-.fade-up.delay-2 { transition-delay: 0.2s; }
-.fade-up.delay-3 { transition-delay: 0.3s; }
-.fade-up.delay-4 { transition-delay: 0.4s; }
-.fade-up.delay-5 { transition-delay: 0.5s; }
+.fade-up.delay-1 { transition-delay: 0.08s; }
+.fade-up.delay-2 { transition-delay: 0.16s; }
+.fade-up.delay-3 { transition-delay: 0.24s; }
+.fade-up.delay-4 { transition-delay: 0.32s; }
+.fade-up.delay-5 { transition-delay: 0.4s; }
 
-/* Section header */
+/* Section header — the "//" is a code comment marker, used once per
+   section eyebrow to keep the engineer's-notebook voice consistent */
 .section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent-violet);
-  margin-bottom: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--amber);
+  margin-bottom: 0.9rem;
+}
+.section-label::before {
+  content: '//';
+  color: var(--paper-faint);
 }
 
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  font-weight: 700;
-  color: var(--text-primary);
+  font-size: clamp(2rem, 4vw, 2.7rem);
+  font-weight: 600;
+  color: var(--paper);
   line-height: 1.15;
   margin-bottom: 1rem;
+  letter-spacing: -0.01em;
 }
 
 .section-divider {
-  width: 3rem;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent-purple), var(--accent-violet));
+  width: 2.75rem;
+  height: 3px;
+  background: var(--amber);
   border-radius: 2px;
   margin-bottom: 3rem;
 }
 
-/* Gradient text */
+/* Gradient text — used sparingly, amber to teal, not the default violet sweep */
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent-purple), var(--accent-violet), #C084FC);
+  background: linear-gradient(100deg, var(--amber), var(--teal) 130%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -144,68 +199,62 @@ img {
 .btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.8rem 1.8rem;
-  background: var(--accent-purple);
-  color: var(--white);
+  gap: 0.55rem;
+  padding: 0.85rem 1.7rem;
+  background: var(--amber);
+  color: #191207;
   font-family: var(--font-display);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  letter-spacing: 0.05em;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all var(--transition-fast);
-  text-transform: uppercase;
 }
 .btn-primary:hover {
-  background: var(--accent-violet);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px var(--accent-glow);
+  box-shadow: 0 10px 24px -8px rgba(240, 163, 67, 0.45);
+  filter: brightness(1.06);
 }
+.btn-primary:active { transform: translateY(0); }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.8rem 1.8rem;
-  background: transparent;
-  color: var(--text-primary);
+  gap: 0.55rem;
+  padding: 0.85rem 1.7rem;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--paper);
   font-family: var(--font-display);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  letter-spacing: 0.05em;
-  border: 1px solid var(--border-subtle);
-  border-radius: 6px;
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
   cursor: pointer;
   transition: all var(--transition-fast);
-  text-transform: uppercase;
 }
 .btn-secondary:hover {
-  border-color: var(--accent-purple);
-  color: var(--accent-violet);
+  border-color: var(--glass-border-strong);
+  background: var(--glass-strong);
   transform: translateY(-2px);
 }
 
-/* Glow orbs background */
-.bg-orb {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(80px);
+/* Shared glass-panel utility */
+.glass-panel {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  position: relative;
+}
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(160deg, rgba(255,255,255,0.06), transparent 45%);
   pointer-events: none;
-  z-index: 0;
-}
-.bg-orb-1 {
-  width: 500px;
-  height: 500px;
-  background: rgba(124, 58, 237, 0.12);
-  top: -100px;
-  right: -100px;
-}
-.bg-orb-2 {
-  width: 400px;
-  height: 400px;
-  background: rgba(168, 85, 247, 0.08);
-  bottom: 100px;
-  left: -100px;
 }

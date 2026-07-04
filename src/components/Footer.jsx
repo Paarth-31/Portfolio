@@ -6,9 +6,7 @@ export default function Footer({ contact }) {
     <footer className="footer">
       <div className="footer__inner">
         <div className="footer__left">
-          <span className="footer__logo">
-            PG<span className="footer__logo-dot">.</span>
-          </span>
+          <span className="footer__logo">paarth</span>
           <p className="footer__tagline">
             Building things for the web.
           </p>
