@@ -1,0 +1,10 @@
+/* App.css - app-level styles */
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
